@@ -1,0 +1,124 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: #f4f7fa;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 16px;
+    padding: 0 20px;
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    text-align: center;
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #1e3d58;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+.input-container {
+    margin-bottom: 30px;
+}
+
+textarea {
+    width: 100%;
+    height: 180px;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    resize: none;
+    background-color: #f9fafb;
+    transition: border 0.3s ease;
+}
+
+textarea:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+
+.btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.report-container {
+    display: none;
+    margin-top: 30px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: #e9ecef;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    color: #495057;
+}
+
+#copyButton {
+    background-color: #28a745;
+}
+
+#copyButton:hover {
+    background-color: #218838;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    textarea {
+        height: 150px;
+    }
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Counts Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Forum Counts Report</h1>
+            <p>Enter the forum names and counts, one per line, to generate a detailed report.</p>
+        </header>
+
+        <div class="input-container">
+            <textarea id="forumInput" rows="10" placeholder="Enter forum name and count (one per line)"></textarea>
+            <button onclick="generateReport()" class="btn">Generate Report</button>
+            <button onclick="refreshInput()" class="btn">Clear</button> <!-- Refresh Button -->
+        </div>
+
+        <div id="reportContainer" class="report-container">
+            <h2>Generated Report:</h2>
+            <pre id="report"></pre>
+            <button id="copyButton" onclick="copyToClipboard()" class="btn">Copy Report</button>
+        </div>
+    </div>
+
+    <script>
+        function generateReport() {
+            const input = document.getElementById('forumInput').value;
+            const data = input.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+
+            fetch('/generate_report', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ data: data })
+            })
+            .then(response => response.json())
+            .then(result => {
+                const reportContainer = document.getElementById('reportContainer');
+                const reportElement = document.getElementById('report');
+
+                if (result.report) {
+                    reportElement.textContent = result.report;
+                    reportContainer.style.display = 'block';
+                } else {
+                    alert(result.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function copyToClipboard() {
+            const reportText = document.getElementById('report').textContent;
+            navigator.clipboard.writeText(reportText).then(() => {
+                alert("Report copied to clipboard!");
+            }).catch(err => {
+                console.error("Error copying to clipboard: ", err);
+            });
+        }
+
+        // Function to clear both input and output areas
+        function refreshInput() {
+            document.getElementById('forumInput').value = ''; // Clear the textarea
+            document.getElementById('report').textContent = ''; // Clear the report output
+            document.getElementById('reportContainer').style.display = 'none'; // Hide the report container
+        }
+    </script>
+</body>
+</html>
